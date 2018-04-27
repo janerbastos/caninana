@@ -1,0 +1,34 @@
+{% extends 'caninana/comum/contents.html' %}
+{% load event_tags %}
+
+{% block content %}
+{% if object %}
+    {% has_contents_by_organizador object %}
+{% else %}
+<table class="table">
+    <thead>
+        <th>Título</th>
+        <th>Tipo de conteúdo</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+    </thead>
+    <tbody>
+        {% if objects %}
+            {% for object in objects %}
+            <tr>
+                <td>{{object.titulo}}</td>
+                <td>{{object.get_content_type_display}}</td>
+                <td>{{object.status}}</td>
+                <td>
+                    <a href="{{object.get_absolute_url}}?action=update"><i class="fa fa-edit"></i></a>
+                    <a href="{{object.get_absolute_url}}"><i class="fa fa-tv"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="2">Nenhuma categoria foi encontrada.</td></tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock content %}

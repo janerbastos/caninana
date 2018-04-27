@@ -1,0 +1,4 @@
+*.pyc
+*.sqlite*
+_database.ini
+/migrations

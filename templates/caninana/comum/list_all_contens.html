@@ -1,0 +1,12 @@
+{% extends 'caninana/comum/contents.html' %}
+{% load event_tags %}
+
+{% block content %}
+    {% if objects %}
+        <div class="row">
+        {% has_lista_all_contents objects evento=evento %}
+        </div>
+    {% else %}
+        <p>Nenhum contúdo encontrado</p>
+    {% endif %}
+{% endblock content %}

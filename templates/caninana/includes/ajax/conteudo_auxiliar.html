@@ -1,0 +1,16 @@
+{% if form %}
+    {% load bootstrap %}
+    {{ form|bootstrap }}
+{% endif %}
+
+{% if opcao == 'at_item_sessao' %}
+<ul>
+    {% if objects %}
+        {% for object in objects %}
+            <li><input type="checkbox" value="{{object.url}}", name="itens_sessao">&nbsp;{{object.titulo}}</li>
+        {% endfor %}
+    {% else %}
+        <li><strong>Nenhum conteúdo encontrado.</strong></li>
+    {% endif %}
+</ul>
+{% endif %}

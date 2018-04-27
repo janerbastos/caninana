@@ -1,0 +1,21 @@
+{% extends 'caninana/comum/contents.html' %}
+
+{% block content %}
+    {% if object.fluxo_trabalho == 'privado' %}
+    <!-- Falta definir regra de permissão. -->
+    <a href="{{object.get_absolute_url}}?workflow=publicado" title="Publicar"><i class="fa  fa-thumbs-up"></i></a>
+    <span class="text-danger" style="font-size:12px">
+        {% if not object.publicacao_at %}
+            Por: Janer Bastos de Melo -- criado em {{object.criacao_at}}
+        {% else %}
+            Por: Janer Bastos de Melo -- {{workflow}} em {{object.publicacao_at}}s
+        {% endif %}
+    </span>
+    {% else %}
+        <a class="text-danger" href="{{object.get_absolute_url}}?workflow=privado" title="Retirar"><i class="fa  fa-thumbs-down"></i></a>
+        <span style="font-size:12px">Por: Janer Bastos de Melo -- {{workflow}} {{object.publicacao_at}}</span>
+    {% endif %}
+
+    {% if object.descricao %}<p class="lead">{{object.descricao}}</p>{% endif %}
+    <p style="margin-top:30px;">{{object.corpo}}</p>
+{% endblock content %}

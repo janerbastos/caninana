@@ -1,0 +1,9 @@
+
+{% if objects %}
+    {% for object in objects %}
+    <p><a href="{{object.get_absolute_url}}">{{object.titulo}}</a></p>
+    {% endfor %}
+{% else %}
+    <p>Nenhum informe registrado</p>
+{% endif %}
+

@@ -1,0 +1,62 @@
+{% extends 'caninana/comum/contents.html' %}
+{% load event_tags staticfiles %}
+
+{% block content %}
+{% if object %}
+    <p>
+        <a href="{{object.evento.get_absolute_url}}?@@list=at_sessao">&nbsp;<i class="fa fa-reply"></i>&nbsp;Retornar nível acima</a>&nbsp;
+        <a href="{{object.get_absolute_url}}?action=update"><i class="fa fa-pencil"></i> Editar</a>
+    </p>
+
+    <h3>Itens dessa sessão</h3>
+    <p>
+        {% if object.contents.count > 0 %}
+        <ul style="list-style-type: none;">
+            {% for item in object.contents.all %}
+            <li>{{item.titulo}}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>Nenhum registro encontrado</strong>
+        {% endif %}
+    </p>
+{% else %}
+    {% if objects %}
+        <div class="row">
+        {% for object in objects %}
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading"><strong>{{object.titulo}}</strong></div>
+                    <div class="panel-body">
+                        <p class="text-right">
+                            <a href="#" data-target="#form_modal_ajax"  data-toggle="modal" data-url="{{object.get_absolute_url}}" data-content_type="at_item_sessao" data-action="@@createObject" class="comand"><i class="fa fa-plus"></i></a>
+                            <a href="#" data-target="#form_modal_ajax"  data-toggle="modal" data-url="{{object.get_absolute_url}}" data-content_type="at_item_sessao" data-action="@@removeObject" class="comand"><i class="fa fa-minus-circle"></i></a>
+                            <a href="{{object.get_absolute_url}}?action=update"><i class="fa fa-pencil"></i></a>
+                            <a href="{{object.get_absolute_url}}"><i class="fa fa-folder"></i></a>
+                        </p>
+                        {% if object.contents.all.count > 0 %}
+                            <ul>
+                                {% for item in object.contents.all %}
+                                    <li><a href="{{item.get_content.get_absolute_url}}"> {{ item.titulo }} </a></li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <strong>Nenhum item encontrado.</strong>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+
+{% include 'caninana/includes/form_modal_ajax.html' %}
+
+{% endblock content %}
+
+{% block staticfile_botton %}
+
+<script src="{% static 'js/event.js' %}"></script>
+
+{%endblock staticfile_botton %}

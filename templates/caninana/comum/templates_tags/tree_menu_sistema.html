@@ -1,0 +1,37 @@
+{% load event_tags %}
+
+{% if nivel == 0 %}
+    {% if menu.sub_menus.count > 0 %}
+    <li>
+        <i class="fa fa-folder-open-o"></i> {{menu.titulo}}
+        <a href="{{menu.get_absolute_url}}?@@createObject=at_menu"><i class="fa fa-plus-square-o" title="Novo item ao menu"></i> </a>
+        <a href="{{menu.get_absolute_url}}?action=update"><i class="fa fa-pencil" title="Editar"></i> </a>
+        {% has_bulder_menu menu.sub_menus.all 1 sistema=True %}
+    </li>
+    {% else %}
+    <li>
+        <i class="fa fa-link"></i> {{menu.titulo}}
+        <a href="{{menu.get_absolute_url}}?@@createObject=at_menu"><i class="fa fa-plus-square-o" title="Novo item ao menu"></i> </a>
+        <a href="{{menu.get_absolute_url}}?action=update"><i class="fa fa-pencil" title="Editar"></i> </a>
+    </li>
+    {% endif %}
+{% endif %}
+
+{% if nivel > 0 %}
+    <ul style="list-style-type: none;">
+    {% if menu.sub_menus.count > 0 %}
+    <li>
+        <i class="fa fa-folder-open-o"></i> {{menu.titulo}}
+        <a href="{{menu.get_absolute_url}}?@@createObject=at_menu"><i class="fa fa-plus-square-o" title="Novo item ao menu"></i> </a>
+        <a href="{{menu.get_absolute_url}}?action=update"><i class="fa fa-pencil" title="Editat"></i> </a>
+        {% has_bulder_menu menu.sub_menus.all 1 sistema=True %}
+    </li>
+    {% else %}
+    <li>
+        <i class="fa fa-link"></i> {{menu.titulo}}
+        <a href="{{menu.get_absolute_url}}?@@createObject=at_menu"><i class="fa fa-plus-square-o" title="Novo item ao menu"></i> </a>
+        <a href="{{menu.get_absolute_url}}?action=update"><i class="fa fa-pencil" title="Editar"></i> </a>
+    </li>
+    {% endif %}
+    </ul>
+{% endif %}

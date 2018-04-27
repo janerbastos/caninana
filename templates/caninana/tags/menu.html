@@ -1,0 +1,60 @@
+{% load event_tags %}
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{evento.index_evento}}">{{evento.url|upper}}</a>
+    </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{{evento.index_evento}}">Página inicial</a></li>
+          {% has_bulder_menu menus %}
+          {% if user.is_authenticated %}
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Evento <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li><a href="{% url 'manage_event:action' %}?view={{evento.url}}">Configurações</a></li>
+          <li><a href="#">Trocar Senha</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Agregadores</li>
+          <li><a href="{{evento.get_absolute_url}}?@@list=at_menu">Menu</a></li>
+          <li><a href="{{evento.get_absolute_url}}?@@list=at_organizador">Organizadores</a></li>
+          <li><a href="{{evento.get_absolute_url}}?@@list=at_sessao">Sessões</a></li>
+          <li><a href="{{evento.get_absolute_url}}?@@list=at_all">Todos os conteúdos</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Conteúdos</li>
+          {% has_content_menu 'at_pagina' evento.index_evento %}
+          {% has_content_menu 'at_informe' evento.index_evento %}
+          {% has_content_menu 'at_agenda' evento.index_evento %}
+          {% has_content_menu 'at_link' evento.index_evento %}
+          {% has_content_menu 'at_banner' evento.index_evento %}
+          {% has_content_menu 'at_imagem' evento.index_evento %}
+          <li role="separator" class="divider"></li>
+          {% has_content_menu 'at_menu' evento.index_evento %}
+          {% has_content_menu 'at_organizador' evento.index_evento %}
+          {% has_content_menu 'at_sessao' evento.index_evento %}
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Sair</a></li>
+          </ul>
+          </li>
+          {% else %}
+          <li><a href="#">Entrar</a></li>
+          {% endif %}
+        </ul>
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+      <li><a href="../navbar-static-top/">Static top</a></li>
+      <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+      </ul>
+      -->
+      </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>

@@ -1,0 +1,24 @@
+<!-- Modal Conforma Excluir registr -->
+<div class="modal fade" id="form_modal_ajax" tabindex="-1" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<form action="" method="POST" >
+			{% csrf_token %}
+			<input type="hidden" name="_method" value="create"/>
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Título do Form aqui?</h4>
+				</div>
+
+				<div class="modal-body">
+					<p></p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" id="save_button" data-dismiss="modal">Fechar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

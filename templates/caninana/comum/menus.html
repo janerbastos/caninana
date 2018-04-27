@@ -1,0 +1,54 @@
+{% extends 'caninana/comum/contents.html' %}
+{% load event_tags %}
+
+{% block content %}
+{% if object %}
+    <p>
+        {% if object.menu_pai %}
+            <a href="{{object.menu_pai.get_absolute_url}}">&nbsp;<i class="fa fa-reply"></i>&nbsp;Retornar nível acima&nbsp;</a>
+        {% else %}
+            <a href="{{object.evento.get_absolute_url}}?@@list=at_menu">&nbsp;<i class="fa fa-reply"></i>&nbsp;Retornar nível acima&nbsp;</a>
+        {% endif %}&nbsp;
+        <a href="{{object.get_absolute_url}}?@@createObject=at_menu"><i class="fa fa-plus-square"></i> Adicionar item ao menu</a>
+    </p>
+
+    Listar aqui seus itens de menu
+    <p>
+        <ul>
+        {% if object.sub_menus.count > 0 %}
+            {% has_bulder_menu object.sub_menus.all sistema=True %}
+        {% else %}
+            <li>{{object.titulo}}</li>
+        {% endif %}
+        </ul>
+    </p>
+{% else %}
+<table class="table">
+    <thead>
+        <th>Titulo do menu</th>
+        <th>Nó</th>
+        <th>Link</th>
+        <th>Status</th>
+        <th>&nbsp&nbsp;</th>
+    </thead>
+    <tbody>
+        {% if objects %}
+            {% for object in objects %}
+            <tr>
+                <td>{{object.titulo}}</td>
+                <td>{% if object.menu_pai == None %}Raiz{% endif %}</td>
+                <td>{{object.link}}</td>
+                <td>{{object.status}}</td>
+                <td>
+                    <a href="{{object.get_absolute_url}}?action=update"><i class="fa fa-edit"></i></a>
+                    <a href="{{object.get_absolute_url}}"><i class="fa fa-tv"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="2">Nenhum menu foi encontrada.</td></tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock content %}

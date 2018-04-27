@@ -1,0 +1,19 @@
+
+<div class="col-md-4">
+    <div class="panel panel-success">
+        <div class="panel-heading">{% autoescape off %}{{icone}}{% endautoescape %} - <strong>{{content_name}}</strong></div>
+        <div class="panel-body">
+            {% if objects %}
+                {% for object in objects %}
+                    <p>
+                        <a href="{{object.get_absolute_url}}"><i class="fa fa-folder-o"></i></a>&nbsp;
+                        <a href="{{object.get_absolute_url}}?action=update"><i class="fa fa-pencil"></i></a>&nbsp;
+                        {{ object.titulo }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum regitro de {{content_name}} encontrado.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
